@@ -1,0 +1,167 @@
+from 1 to 5 use normal command button and for 7 to 9 Developer -->Insert --> use active X control select 1st command 
+1 ) message Button program
+
+Sub Meassage_button()
+MsgBox ("Welcome to Excel")
+End Sub
+
+2)create a 5 Sheet and loop them
+
+Sub sheets()
+    Dim Ws As Worksheet
+    y = 2
+    For Each Ws In ThisWorkbook.sheets
+        ThisWorkbook.sheets("Loop Sheet").Cells(y, 1) = Ws.Name
+        y = y + 1
+        Next Ws
+End Sub
+
+3)Area of Shapes
+
+https://best-excel-tutorial.com/57-vba-tutorial/225-create-own-function-vba
+
+Function AreaRectangle(Height As Double, Width As Double) As Double
+
+AreaRectangle = Width * Height
+
+End Function
+
+ 
+
+Function AreaTriangle(Side1 As Double, Side2 As Double, Side3 As Double) As Double
+
+Dim p As Double
+
+p = (Side1 + Side2 + Side3) / 2
+
+AreaTriangle = Sqr(p * (p - Side1) * (p - Side2) * (p - Side3))
+
+End Function
+
+ 
+
+Function AreaSquare(Side As Double) As Double
+
+AreaSquare = Side * Side
+
+End Function
+
+ 
+
+Function AreaCircle(Radius As Double) As Double
+
+AreaCircle = 3.14159 * Radius * Radius
+
+End Function
+
+4)Arithmetic operation
+
+No code create a table to add,sub,multi,Divide
+
+5)Sales calculator
+Sub Button1_Click()
+
+Dim employee As String, total As Integer, sheet As Worksheet, i As Integer
+total = 0
+employee = InputBox("Enter the employee name (case sensitive)")
+For Each sheet In Worksheets
+For i = 2 To 13
+If sheet.Cells(i, 2).Value = employee Then
+total = total + sheet.Cells(i, 3).Value
+End If
+Next i
+Next sheet
+MsgBox ("Total sales of " & employee & " is " & total)
+
+
+End Sub
+
+6)Chart for result Analysis
+
+no code refer this video
+https://www.youtube.com/watch?v=iFe04n1qKN4&ab_channel=MyE-Lesson
+
+how to work
+
+7)String Manipulation
+
+https://www.excel-easy.com/vba/string-manipulation.html
+
+Private Sub CommandButton1_Click()
+Dim text1 As String, text2 As String
+text1 = "Hi"
+text2 = "Tim"
+
+MsgBox text1 & " " & text2
+End Sub
+
+Private Sub CommandButton2_Click()
+Dim text As String
+text = "example text"
+
+MsgBox Left(text, 4)
+End Sub
+
+Private Sub CommandButton3_Click()
+MsgBox Right("example text", 2)
+End Sub
+
+Private Sub CommandButton4_Click()
+MsgBox Mid("example text", 9, 2)
+End Sub
+
+Private Sub CommandButton5_Click()
+MsgBox Len("example text")
+End Sub
+
+Private Sub CommandButton6_Click()
+MsgBox InStr("example text", "am")
+End Sub
+
+8)Number of Words 
+
+Sub Button2_Click()
+Dim wordcount As Long, rng As Range, s As String, n As Long
+For Each rng In ActiveSheet.UsedRange.Cells
+s = Application.WorksheetFunction.Trim(rng.Text)
+n = 0
+If s <> vbNullString Then
+n = Len(s) - Len(Replace(s, " ", " ")) + 1
+End If
+wordcount = wordcount + n
+Next rng
+MsgBox wordcount & "words in this worksheet"
+End Sub
+
+9)Min and Max
+
+Private Sub CommandButton1_Click()
+Dim rng As Range
+Dim dblmin As Double
+Set rng = Sheet1.Range("D5:D14")
+dblmin = Application.WorksheetFunction.Min(rng)
+MsgBox dblmin
+End Sub
+
+Private Sub CommandButton2_Click()
+Dim rng As Range
+Dim dblmax As Double
+Set rng = Sheet1.Range("D5:D14")
+dblmax = Application.WorksheetFunction.Max(rng)
+MsgBox dblmax
+End Sub
+
+10) Cash Flow Estimate
+
+Dim rate As Double
+Dim cf(50) As Double
+Dim val As Double
+rate = Range("B1").Value
+cf(0) = Range("B3").Value
+cf(1) = Range("C3").Value
+cf(2) = Range("D3").Value
+cf(3) = Range("E3").Value
+cf(4) = Range("F3").Value
+val = NPV(rate, cf)
+Range("B4").Value = val
+MsgBox ("cash flow is eatemasted"), vbInformation
